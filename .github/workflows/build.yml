@@ -21,7 +21,7 @@ jobs:
       - name: Install west and requirements
         run: |
           pip install west
-          west init -l .
+          west init -m https://github.com/zephyrproject-rtos/zephyr --mr main zephyr
           west update
           west zephyr-export
           pip install -r zephyr/scripts/requirements.txt
