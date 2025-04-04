@@ -21,18 +21,13 @@ jobs:
       - name: Prepare project structure
         run: |
           pip install west
-          mkdir -p ~/projects
-          rsync -av --exclude='.git' ./ ~/projects/mqtt_subscriber
-          mv .git ~/projects/
-          cd ~/projects
-          west init zephyr
-          cd zephyr
+          west init -l zephyr
           west update
           west zephyr-export
-          pip install -r scripts/requirements.txt
+          pip install -r zephyr/scripts/requirements.txt
 
       - name: Build mqtt_subscriber
         run: |
-          cd ~/projects/mqtt_subscriber
+          cd mqtt_subscriber
           west build -b m5stack_atom_lite/esp32/procpu . \
             -- -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
