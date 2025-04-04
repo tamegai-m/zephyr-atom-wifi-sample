@@ -1,3 +1,10 @@
+name: Build Zephyr App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,3 +31,4 @@ jobs:
           west build -b m5stack_atom_lite/esp32/procpu . \
             -- -DBOARD_ROOT=${{ github.workspace }} \
                -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
+
