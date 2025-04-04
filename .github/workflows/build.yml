@@ -24,7 +24,7 @@ jobs:
           west init -l .        # ← リポジトリ直下に west.yml がある前提！
           west update
           west zephyr-export
-          pip install -r zephyr/scripts/requirements.txt
+          pip install -r zephyrproject/zephyr/scripts/requirements.txt
 
       - name: Build the app
         run: |
