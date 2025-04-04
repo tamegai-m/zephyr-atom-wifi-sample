@@ -20,6 +20,7 @@ jobs:
 
       - name: Prepare project structure
         run: |
+          cd $GITHUB_WORKSPACE
           pip install west
           west init -l zephyr
           west update
@@ -28,6 +29,6 @@ jobs:
 
       - name: Build mqtt_subscriber
         run: |
-          cd mqtt_subscriber
+          cd $GITHUB_WORKSPACE/mqtt_subscriber
           west build -b m5stack_atom_lite/esp32/procpu . \
             -- -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
