@@ -21,14 +21,16 @@ jobs:
       - name: Install west and dependencies
         run: |
           pip install west
-          cd $HOME
-          west init -l zephyr-atom-wifi-sample/mqtt_subscriber
+          mkdir -p ~/projects
+          cp -r . ~/projects/mqtt_subscriber
+          cd ~/projects
+          west init -l mqtt_subscriber
           west update
           west zephyr-export
           pip install -r zephyr/scripts/requirements.txt
 
       - name: Build mqtt_subscriber
         run: |
-          cd $HOME/zephyr-atom-wifi-sample/mqtt_subscriber
+          cd ~/projects/mqtt_subscriber
           west build -b m5stack_atom_lite/esp32/procpu . \
             -- -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
