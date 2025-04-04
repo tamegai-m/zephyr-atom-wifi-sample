@@ -1,4 +1,4 @@
-name: Build (ESP32)
+name: Build Zephyr App
 
 on:
   push:
@@ -10,35 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout sample repo
+      - name: Checkout this repository
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.10"
 
-      - name: Install west and deps
+      - name: Install west and requirements
         run: |
           pip install west
-
-      - name: Set up Zephyr workspace
-        run: |
-          west init zephyrproject
-          cd zephyrproject
+          west init -l .
           west update
           west zephyr-export
+          pip install -r zephyr/scripts/requirements.txt
 
-      - name: Install Zephyr build tools
+      - name: Build project
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ninja-build gperf cmake ccache dfu-util \
-            device-tree-compiler wget python3-pip python3-setuptools \
-            python3-wheel xz-utils file make gcc git unzip
-      - name: Build sample
-        run: |
-            west build -b m5stack_atom_lite/esp32/procpu . \
+          west build -b m5stack_atom_lite/esp32/procpu . \
             -- -DBOARD_ROOT=${PWD} \
-                -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
-
-                   
+               -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
