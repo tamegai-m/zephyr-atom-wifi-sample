@@ -21,6 +21,7 @@ jobs:
       - name: Install west and dependencies
         run: |
           pip install west
+          cd $GITHUB_WORKSPACE
           west init -l mqtt_subscriber
           west update
           west zephyr-export
@@ -28,6 +29,7 @@ jobs:
 
       - name: Build the app
         run: |
+          cd $GITHUB_WORKSPACE
           west build -b m5stack_atom_lite/esp32/procpu mqtt_subscriber \
-            -- -DBOARD_ROOT=${GITHUB_WORKSPACE}/mqtt_subscriber \
+            -- -DBOARD_ROOT=$GITHUB_WORKSPACE/mqtt_subscriber \
                -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
