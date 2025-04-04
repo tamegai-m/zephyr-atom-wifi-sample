@@ -25,10 +25,11 @@ jobs:
           rsync -av --exclude='.git' ./ ~/projects/mqtt_subscriber
           mv .git ~/projects/
           cd ~/projects
-          west init -l mqtt_subscriber
+          west init zephyr
+          cd zephyr
           west update
           west zephyr-export
-          pip install -r zephyr/scripts/requirements.txt
+          pip install -r scripts/requirements.txt
 
       - name: Build mqtt_subscriber
         run: |
