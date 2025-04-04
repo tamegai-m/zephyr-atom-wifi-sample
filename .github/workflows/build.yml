@@ -1,0 +1,39 @@
+name: Build (ESP32)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install west and dependencies
+        run: |
+          pip install west
+          west init -l .
+          west update
+          west zephyr-export
+
+      - name: Install Zephyr dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build gperf cmake ccache dfu-util \
+            device-tree-compiler wget python3-pip python3-setuptools \
+            python3-wheel xz-utils file make gcc git unzip
+
+      - name: Build project
+        run: |
+          west build -b m5stack_atom_lite/esp32/procpu . \
+            -- -DBOARD_ROOT=${{ github.workspace }} \
+               -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
