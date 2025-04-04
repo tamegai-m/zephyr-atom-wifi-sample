@@ -35,10 +35,10 @@ jobs:
           sudo apt-get install -y ninja-build gperf cmake ccache dfu-util \
             device-tree-compiler wget python3-pip python3-setuptools \
             python3-wheel xz-utils file make gcc git unzip
-
       - name: Build sample
         run: |
-          cd zephyrproject
-          west build -b m5stack_atom_lite/esp32/procpu ../zephyr-atom-wifi-sample \
-            -- -DBOARD_ROOT=../zephyr-atom-wifi-sample \
-               -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
+            west build -b m5stack_atom_lite/esp32/procpu . \
+            -- -DBOARD_ROOT=${PWD} \
+                -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
+
+                   
