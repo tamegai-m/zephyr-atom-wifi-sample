@@ -21,14 +21,14 @@ jobs:
       - name: Install west and dependencies
         run: |
           pip install west
-          west init -l .        # ← リポジトリ直下に west.yml がある前提！
+          cd $HOME
+          west init -l zephyr-atom-wifi-sample/mqtt_subscriber
           west update
           west zephyr-export
-          pip install -r zephyrproject/zephyr/scripts/requirements.txt
+          pip install -r zephyr/scripts/requirements.txt
 
-      - name: Build the app
+      - name: Build mqtt_subscriber
         run: |
+          cd $HOME/zephyr-atom-wifi-sample/mqtt_subscriber
           west build -b m5stack_atom_lite/esp32/procpu . \
-            -- -DBOARD_ROOT=${{ github.workspace }} \
-               -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
-
+            -- -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
