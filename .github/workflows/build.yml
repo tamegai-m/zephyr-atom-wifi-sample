@@ -31,7 +31,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           git clone --depth=1 https://github.com/zephyrproject-rtos/zephyr.git
-          pip install west
+          pip install west requests
           cd zephyr
           west init -l .
           west update
