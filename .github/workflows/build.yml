@@ -30,6 +30,6 @@ jobs:
 
       - name: Build mqtt_subscriber
         run: |
-          cd $GITHUB_WORKSPACE/mqtt_subscriber
+          cd $GITHUB_WORKSPACE
           west build -b m5stack_atom_lite/esp32/procpu . \
             -- -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
