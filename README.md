@@ -1,6 +1,6 @@
 # Zephyr Atom Wi-Fi Sample
 
-![CI](https://github.com/tamegai-m/zephyr-atom-wifi-sample/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/tamegai-m/zephyr-atom-wifi-sample/actions/workflows/build.yml/badge.svg)
 
 This repository is a sample Zephyr project for running on **M5Stack ATOM Lite (ESP32)** with **Wi-Fi enabled**, based on Zephyr v4.1.99.
 
