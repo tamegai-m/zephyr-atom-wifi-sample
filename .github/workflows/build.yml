@@ -18,6 +18,14 @@ jobs:
         with:
           python-version: "3.10"
 
+      - name: Set up ESP32 toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget tar xz-utils
+          wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch5/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.xz
+          tar -xf xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.xz
+          echo "$GITHUB_WORKSPACE/xtensa-esp32-elf/bin" >> $GITHUB_PATH
+
       - name: Prepare project structure
         run: |
           cd $GITHUB_WORKSPACE
@@ -26,11 +34,13 @@ jobs:
           west init -l zephyr
           west update
           west zephyr-export
-          source zephyr/zephyr-env.sh
           pip install -r zephyr/scripts/requirements.txt
 
       - name: Build mqtt_subscriber
         run: |
-          cd $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/mqtt_subscriber
           west build -b m5stack_atom_lite/esp32/procpu . \
             -- -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
+        env:
+          ZEPHYR_TOOLCHAIN_VARIANT: espressif
+          ESPRESSIF_TOOLCHAIN_PATH: $GITHUB_WORKSPACE/xtensa-esp32-elf
