@@ -1,6 +1,6 @@
 # Zephyr Atom Wi-Fi Sample
 
-![CI](https://github.com/${{ github.repository }}/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/tamegai-m/zephyr-atom-wifi-sample/actions/workflows/ci.yml/badge.svg)
 
 This repository is a sample Zephyr project for running on **M5Stack ATOM Lite (ESP32)** with **Wi-Fi enabled**, based on Zephyr v4.1.99.
 
@@ -22,12 +22,13 @@ west build -b m5stack_atom_lite/esp32/procpu . \
 
 # ```
 # ~/projects/
-# ├── bootloader/         # Optional bootloader (e.g., MCUboot)
-# ├── modules/            # Additional West modules
-# ├── zephyr_atom_wifi_sample/    # Application directory (this repository)
-# ├── tools/              # Tools and helper scripts
-# └── zephyr/             # Zephyr RTOS source (west init -l . で使う)
+# ├── bootloader/              # Optional bootloader (e.g., MCUboot)
+# ├── modules/                 # Additional West modules
+# ├── zephyr_atom_wifi_sample/ # Application directory (this repository)
+# ├── tools/                   # Tools and helper scripts
+# └── zephyr/                  # Zephyr RTOS source (west init -l .)
 # ```
 
-# You should execute `west build` from within `zephyr_atom_wifi_sample/`.
+# Execute `west build` from within `zephyr_atom_wifi_sample/`.
 # This setup mirrors the structure described in the accompanying Qiita article.
+
