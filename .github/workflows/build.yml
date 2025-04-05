@@ -31,10 +31,11 @@ jobs:
           cd $GITHUB_WORKSPACE
           git clone --depth=1 https://github.com/zephyrproject-rtos/zephyr.git
           pip install west
-          west init -l zephyr
+          cd zephyr
+          west init -l .
           west update
           west zephyr-export
-          pip install -r zephyr/scripts/requirements.txt
+          pip install -r scripts/requirements.txt
 
       - name: Build mqtt_subscriber
         run: |
