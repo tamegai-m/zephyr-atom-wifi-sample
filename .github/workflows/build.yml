@@ -26,6 +26,7 @@ jobs:
           cd ~/.espressif/tools/xtensa-esp32-elf
           wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch5/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.gz
           tar -xzf xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.gz
+          mv xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5 xtensa-esp32-elf
 
       - name: Prepare project structure
         run: |
@@ -38,7 +39,7 @@ jobs:
           west zephyr-export
           pip install -r scripts/requirements.txt
 
-      - name: Build mqtt_subscriber
+      - name: Build project
         run: |
           cd $GITHUB_WORKSPACE
           west build -b m5stack_atom_lite/esp32/procpu . \
