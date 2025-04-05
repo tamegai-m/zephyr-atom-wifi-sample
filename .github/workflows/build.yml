@@ -49,17 +49,7 @@ jobs:
         with:
           name: zephyr-artifacts
           path: |
-            build/
-            #build/zephyr/zephyr.elf
-            #build/zephyr/zephyr.bin
-            #build/zephyr/bootloader/bootloader.bin
+            build/zephyr/zephyr.elf
+            build/zephyr/zephyr.bin
+            $(find build -name "bootloader.bin" || true)
 
-      - name: Add CI badge to README (optional manual step)
-        if: ${{ github.ref == 'refs/heads/main' }}
-        run: |
-          echo "![CI](https://github.com/${{ github.repository }}/actions/workflows/ci.yml/badge.svg)" >> README.md
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add README.md
-          git commit -m "Add CI status badge"
-          git push || echo "Badge already exists or push skipped"
