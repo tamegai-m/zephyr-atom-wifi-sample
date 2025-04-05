@@ -36,6 +36,7 @@ jobs:
           west init -l .
           west update
           west zephyr-export
+          west blobs fetch hal_espressif
           pip install -r scripts/requirements.txt
 
       - name: Build project
