@@ -26,6 +26,7 @@ jobs:
           west init -l zephyr
           west update
           west zephyr-export
+          source zephyr/zephyr-env.sh
           pip install -r zephyr/scripts/requirements.txt
 
       - name: Build mqtt_subscriber
