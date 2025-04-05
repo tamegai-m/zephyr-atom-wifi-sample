@@ -22,9 +22,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget tar xz-utils
+          mkdir -p ~/.espressif/tools/xtensa-esp32-elf
+          cd ~/.espressif/tools/xtensa-esp32-elf
           wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch5/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.gz
           tar -xzf xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.gz
-          echo "$GITHUB_WORKSPACE/xtensa-esp32-elf/bin" >> $GITHUB_PATH
 
       - name: Prepare project structure
         run: |
@@ -44,4 +45,4 @@ jobs:
             -- -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
         env:
           ZEPHYR_TOOLCHAIN_VARIANT: espressif
-          ESPRESSIF_TOOLCHAIN_PATH: $GITHUB_WORKSPACE/xtensa-esp32-elf
+          ESPRESSIF_TOOLCHAIN_PATH: ~/.espressif/tools/xtensa-esp32-elf/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5
