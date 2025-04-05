@@ -22,8 +22,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget tar xz-utils
-          wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch5/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.xz
-          tar -xf xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.xz
+          wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch5/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.gz
+          tar -xzf xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.gz
           echo "$GITHUB_WORKSPACE/xtensa-esp32-elf/bin" >> $GITHUB_PATH
 
       - name: Prepare project structure
@@ -38,7 +38,7 @@ jobs:
 
       - name: Build mqtt_subscriber
         run: |
-          cd $GITHUB_WORKSPACE/mqtt_subscriber
+          cd $GITHUB_WORKSPACE
           west build -b m5stack_atom_lite/esp32/procpu . \
             -- -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
         env:
