@@ -51,6 +51,7 @@ jobs:
           path: |
             build/zephyr/zephyr.elf
             build/zephyr/zephyr.bin
+            build/zephyr/bootloader/bootloader.bin
 
       - name: Add CI badge to README (optional manual step)
         if: ${{ github.ref == 'refs/heads/main' }}
