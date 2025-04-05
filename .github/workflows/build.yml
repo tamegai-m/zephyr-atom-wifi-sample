@@ -22,10 +22,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget tar xz-utils
-          mkdir -p /home/runner/.espressif/tools/xtensa-esp32-elf
-          cd /home/runner/.espressif/tools/xtensa-esp32-elf
+          mkdir -p ~/.espressif/tools/xtensa-esp32-elf
+          cd ~/.espressif/tools/xtensa-esp32-elf
           wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch5/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.gz
           tar -xzf xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5-linux-amd64.tar.gz
+          mv xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5 xtensa-esp32-elf
 
       - name: Prepare project structure
         run: |
@@ -39,10 +40,10 @@ jobs:
           pip install -r scripts/requirements.txt
 
       - name: Build mqtt_subscriber
-        env:
-          ZEPHYR_TOOLCHAIN_VARIANT: espressif
-          ESPRESSIF_TOOLCHAIN_PATH: /home/runner/.espressif/tools/xtensa-esp32-elf/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch5/xtensa-esp32-elf
         run: |
           cd $GITHUB_WORKSPACE
           west build -b m5stack_atom_lite/esp32/procpu . \
             -- -DCONFIG_ESP32_USE_UNSUPPORTED_REVISION=y
+        env:
+          ZEPHYR_TOOLCHAIN_VARIANT: espressif
+          ESPRESSIF_TOOLCHAIN_PATH: ~/.espressif/tools/xtensa-esp32-elf
